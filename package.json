@@ -1,0 +1,21 @@
+{
+  "name": "carrinho-de-compras-api",
+  "version": "1.0.0",
+  "description": "Uma API que pretende simular o processo de compra de produtos de um marketplace (de forma bem simples para estudos).",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "Gilberto Augusto",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.5"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0",
+    "sqlite3": "^5.0.0"
+  }
+}

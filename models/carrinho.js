@@ -5,7 +5,6 @@
  *       seriam dados teoricamente de "sessão".
  */
 class Carrinho {
-
     constructor() {
         this.id = btoa((new Date().toString()));
 
@@ -22,7 +21,6 @@ class Carrinho {
      * @param {BigInt} quantidade Quantidade do produto a ser adicionado no carrinho.
      */
     addProduto(produto, quantidade = 1) {
-
         this.produtos.forEach(produtoLista => {
             if (produto.id === produtoLista.id) {
                 produtoLista.quantidade+= quantidade;
@@ -49,7 +47,7 @@ class Carrinho {
         const carrinho = new Carrinho();
         Carrinho.carrinhos.add(carrinho);
         return carrinho;
-    }
+    };
 
     /**
      * Localizar o carrinho pelo Id.
@@ -58,13 +56,13 @@ class Carrinho {
      */
     static getCarrinhoById(id) {
         let carrinho = null;
+
         Carrinho.carrinhos.forEach(carrinhoLista => {
             if (carrinhoLista.id === id) {
                 carrinho = carrinhoLista;               
             }
         });
-        return carrinho;
-    }
 
-    
+        return carrinho;
+    };
 }

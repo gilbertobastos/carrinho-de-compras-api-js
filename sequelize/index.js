@@ -16,7 +16,7 @@ const CompraProdutos = CompraProdutosModel(sequelize);
 
 Produto.belongsToMany(Compra, {through: CompraProdutos});
 Compra.belongsToMany(Produto, {through: CompraProdutos});
-sequelize.sync({force: true});
+sequelize.sync();
 
 module.exports = {
     Produto,

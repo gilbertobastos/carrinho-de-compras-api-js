@@ -14,6 +14,7 @@ const Produto = ProdutoModel(sequelize);
 const Compra = CompraModel(sequelize);
 const CompraProdutos = CompraProdutosModel(sequelize);
 
+
 Produto.belongsToMany(Compra, {through: CompraProdutos});
 Compra.belongsToMany(Produto, {through: CompraProdutos});
 sequelize.sync();

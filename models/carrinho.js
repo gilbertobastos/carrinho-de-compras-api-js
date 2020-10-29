@@ -6,7 +6,7 @@
  */
 class Carrinho {
     constructor() {
-        this.id = btoa((new Date().toString()));
+        this.id = new Date().toString();
 
         /* Cada entrada do array abaixo será uma dupla, onde
            um dos valores será o produto e o outro a quantidade
@@ -23,7 +23,7 @@ class Carrinho {
     addProduto(produto, quantidade = 1) {
         this.produtos.forEach(produtoLista => {
             if (produto.id === produtoLista.id) {
-                produtoLista.quantidade+= quantidade;
+                produtoLista.quantidade += quantidade;
                 return;
             }
         });
@@ -33,36 +33,6 @@ class Carrinho {
             quantidade: quantidade
         });
     };
-
-    /** Irá armazenar todos os carrinhos... */
-    static carrinhos = [];
-
-    /**
-     * Irá entregar um carrinho ao usuário para
-     * que ele possa guardar suas compras.
-     * 
-     * @returns {Carrinho} O carrinho criado.
-     */
-    static getCarrinhoDesocupado() {
-        const carrinho = new Carrinho();
-        Carrinho.carrinhos.add(carrinho);
-        return carrinho;
-    };
-
-    /**
-     * Localizar o carrinho pelo Id.
-     * 
-     * @param {String} id O id do carrinho. 
-     */
-    static getCarrinhoById(id) {
-        let carrinho = null;
-
-        Carrinho.carrinhos.forEach(carrinhoLista => {
-            if (carrinhoLista.id === id) {
-                carrinho = carrinhoLista;               
-            }
-        });
-
-        return carrinho;
-    };
 }
+
+module.exports = Carrinho;

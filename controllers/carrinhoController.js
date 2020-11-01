@@ -13,8 +13,6 @@ const carrinhoRepository = new CarrinhoRepository();
 exports.getCarrinho = (req, res, next) => {
     const idCarrinho = req.params.id;
 
-    console.log('Batata: ' + idCarrinho);
-
     if (idCarrinho) {
         res.write(JSON.stringify(carrinhoRepository.getCarrinhoById(idCarrinho)));
         res.STATUS_CODE = 200;

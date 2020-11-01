@@ -6,7 +6,7 @@
  */
 class Carrinho {
     constructor() {
-        this.id = new Date().toString();
+        this.id = Buffer.from((new Date().toString())).toString('base64');
 
         /* Cada entrada do array abaixo será uma dupla, onde
            um dos valores será o produto e o outro a quantidade

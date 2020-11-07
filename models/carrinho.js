@@ -21,17 +21,21 @@ class Carrinho {
      * @param {BigInt} quantidade Quantidade do produto a ser adicionado no carrinho.
      */
     addProduto(produto, quantidade = 1) {
+        let produtoExisteLista = false;
+
         this.produtos.forEach(produtoLista => {
-            if (produto.id === produtoLista.id) {
+            if (produto.id === produtoLista.produto.id) {
                 produtoLista.quantidade += quantidade;
-                return;
+                produtoExisteLista = true;
             }
         });
 
-        this.produtos.add({
-            produto: produto,
-            quantidade: quantidade
-        });
+        if (!produtoExisteLista) {
+            this.produtos.push({
+                produto: produto,
+                quantidade: quantidade
+            });
+        }
     };
 }
 

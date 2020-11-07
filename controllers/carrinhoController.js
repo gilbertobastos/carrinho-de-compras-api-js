@@ -1,6 +1,6 @@
 const Carrinho = require('../models/carrinho');
 const CarrinhoRepository = require('../repositories/carrinhoRepository');
-const Produto = require('../sequelize/index');
+const {Produto} = require('../sequelize/index');
 
 /* Os carrinhos */
 const carrinhoRepository = new CarrinhoRepository();
@@ -35,20 +35,27 @@ exports.addProdutoNoCarrinho = (req, res, next) => {
 
     const carrinho = carrinhoRepository.getCarrinhoById(idCarrinho);
     if (!carrinho) {
-        res.JSON({ 'Erro': 'Não foi localizado nenhum carrinho com o ID informado.' })
-            .Status(200)
-            .end();
+        res.write(JSON.stringify({ 'Erro': 'Não foi localizado nenhum carrinho com o ID informado.' }));
+        res.STATUS_CODE = 200;
+        res.end();
         return;
     }
 
-    const produto = Produto.findById(idProduto);
-    if (!produto) {
-        res.JSON({ 'Erro': 'Não foi localizado nenhum produto com o ID informado.' })
-            .Status(200)
-            .end();
-        return;
-    }
-
-    carrinho.addProduto(produto, qtdProduto);
-    res.Status(200).end();
+    Produto.findAll({where: {id: idProduto}})
+        .then(produto => {
+            if (produto.length === 0) {
+                res.write(JSON.stringify({ 'Erro': 'Não foi localizado nenhum produto com o ID informado.' }));
+                res.STATUS_CODE = 200;
+                res.end();
+            } else {
+                carrinho.addProduto(produto[0], qtdProduto);
+                res.STATUS_CODE = 200;
+                res.end();
+            }
+        })
+        .catch(err => {
+            res.write(JSON.stringify(err))
+            res.STATUS_CODE = 400;
+            res.end();
+        });
 }

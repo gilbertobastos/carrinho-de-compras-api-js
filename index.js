@@ -5,7 +5,7 @@ const ProdutoController = require('./controllers/produtoController');
 const Carrinho = require('./models/carrinho');
 
 const express = require('express');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3000;

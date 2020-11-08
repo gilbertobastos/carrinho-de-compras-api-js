@@ -14,11 +14,13 @@ exports.getCarrinho = (req, res, next) => {
     const idCarrinho = req.params.id;
 
     if (idCarrinho) {
+        res.setHeader('Content-Type', 'text/json');
         res.write(JSON.stringify(carrinhoRepository.getCarrinhoById(idCarrinho)));
         res.STATUS_CODE = 200;
         res.end();
     } else {
-        res.write(JSON.stringify(carrinhoRepository.getCarrinhoDesocupado()));
+        res.setHeader('Content-Type', 'text/json');
+        res.write(JSON.stringify(carrinhoRepository.getCarrinhoDesocupado()));        
         res.STATUS_CODE = 201;
         res.end();
     }
@@ -35,6 +37,7 @@ exports.addProdutoNoCarrinho = (req, res, next) => {
 
     const carrinho = carrinhoRepository.getCarrinhoById(idCarrinho);
     if (!carrinho) {
+        res.setHeader('Content-Type', 'text/json');            
         res.write(JSON.stringify({ 'Erro': 'Não foi localizado nenhum carrinho com o ID informado.' }));
         res.STATUS_CODE = 200;
         res.end();
@@ -44,6 +47,7 @@ exports.addProdutoNoCarrinho = (req, res, next) => {
     Produto.findAll({where: {id: idProduto}})
         .then(produto => {
             if (produto.length === 0) {
+                res.setHeader('Content-Type', 'text/json');
                 res.write(JSON.stringify({ 'Erro': 'Não foi localizado nenhum produto com o ID informado.' }));
                 res.STATUS_CODE = 200;
                 res.end();
@@ -54,7 +58,8 @@ exports.addProdutoNoCarrinho = (req, res, next) => {
             }
         })
         .catch(err => {
-            res.write(JSON.stringify(err))
+            res.setHeader('Content-Type', 'text/json');
+            res.write(JSON.stringify(err));
             res.STATUS_CODE = 400;
             res.end();
         });

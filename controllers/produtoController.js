@@ -10,24 +10,28 @@ exports.getProdutos = (req, res, next) => {
     if (idProduto) {
         Produto.findAll({where: {id: idProduto}})
             .then(result => {
-                res.write(JSON.stringify(result));
+                res.setHeader('Content-Type', 'text/json');
+                res.write(JSON.stringify(result));                
                 res.STATUS_CODE = 200;
                 res.end();
             })
             .catch(err => {
-                res.write(JSON.stringify(err));
+                res.setHeader('Content-Type', 'text/json');
+                res.write(JSON.stringify(err));                
                 res.STATUS_CODE = 500;
                 res.end();
             });
     } else {
         Produto.findAll()
             .then(result => {
-                res.write(JSON.stringify(result));
+                res.setHeader('Content-Type', 'text/json');
+                res.write(JSON.stringify(result));                
                 res.STATUS_CODE = 200;
                 res.end();
             })
             .catch(err => {
-                res.write(JSON.stringify(err));
+                res.setHeader('Content-Type', 'text/json');
+                res.write(JSON.stringify(err));                
                 res.STATUS_CODE = 500;
                 res.end();
             });
@@ -52,6 +56,7 @@ exports.addProdutos = (req, res, next) => {
             res.end();
         })
         .catch(err => {
+            res.setHeader('Content-Type', 'text/json');
             res.write(JSON.stringify(err));
             res.STATUS_CODE = 400;
             res.end();

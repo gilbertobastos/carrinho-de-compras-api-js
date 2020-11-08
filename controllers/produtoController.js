@@ -33,3 +33,27 @@ exports.getProdutos = (req, res, next) => {
             });
     }
 }
+
+/**
+ * Método que irá criar um produto no banco de dados
+ * com as informações fornecidas.
+ */
+exports.addProdutos = (req, res, next) => {
+    const nomeProduto = req.body.nomeProduto;
+    const valorProduto = req.body.valorProduto;
+    const descProduto = req.body.descProduto;
+
+    Produto.create({
+        nome: nomeProduto,
+        valor: valorProduto,
+        descricao: descProduto})
+        .then(result => {
+            res.STATUS_CODE = 201;
+            res.end();
+        })
+        .catch(err => {
+            res.write(JSON.stringify(err));
+            res.STATUS_CODE = 400;
+            res.end();
+        });
+}

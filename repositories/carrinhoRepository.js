@@ -65,4 +65,5 @@ class CarrinhoRepository {
     }
 }
 
-module.exports = CarrinhoRepository;
+const carrinhoRepository = new CarrinhoRepository();
+module.exports = carrinhoRepository;

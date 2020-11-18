@@ -1,9 +1,6 @@
 const Carrinho = require('../models/carrinho');
-const CarrinhoRepository = require('../repositories/carrinhoRepository');
+const carrinhoRepository = require('../repositories/carrinhoRepository');
 const {Produto} = require('../sequelize/index');
-
-/* Os carrinhos */
-const carrinhoRepository = new CarrinhoRepository();
 
 /**
  * Método que vai retornar ou um carrinho apenas pelo "id"
